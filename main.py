@@ -1,6 +1,6 @@
-from flask import Flask, make_response, jsonify
-from flask_restful import reqparse, abort, Api, Resource
-from data import db_session, news_api, jobs_api, user_api, news_resources, users_resource
+from flask import Flask
+from flask_restful import Api
+from data import db_session, news_resources, users_resource, jobs_resources
 
 app = Flask(__name__)
 api = Api(app)
@@ -12,6 +12,8 @@ def main():
     api.add_resource(news_resources.NewsResource, '/api/v2/news/<int:news_id>')
     api.add_resource(users_resource.UserListResource, '/api/v2/users')
     api.add_resource(users_resource.UsersResource, '/api/v2/users/<int:user_id>')
+    api.add_resource(jobs_resources.JobListResource, '/api/v2/jobs')
+    api.add_resource(jobs_resources.JobsResource, '/api/v2/jobs/<int:job_id>')
     app.run()
 
 
